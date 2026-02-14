@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEstate | Luxury Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --accent-bg: #f1f5f9;
+            --deep-blue: #0f172a;
+            --primary-blue: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --glass-dark: rgba(15, 23, 42, 0.8);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* HEADER & NAVBAR */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            padding: 15px 8%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo::before {
+            content: '🏠';
+            font-size: 28px;
+            filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        header.scrolled .logo {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            transition: all 0.3s ease;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 8px 0;
+            letter-spacing: 0.3px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        header.scrolled nav a {
+            color: var(--text-primary);
+        }
+
+        header.scrolled nav a:hover {
+            color: #667eea;
+        }
+
+        .btn-contact-nav {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-contact-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-contact-nav:active {
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1501;
+        }
+
+        .nav-toggle:hover {
+            transform: rotate(90deg);
+        }
+
+        header.scrolled .nav-toggle {
+            color: var(--text-primary);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%), 
+                        url('P1119337.JPG.jpeg') center/cover no-repeat;
+            background-attachment: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 200px 10% 80px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, -50px) rotate(10deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* SEARCH BAR */
+        .search-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .search-container input,
+        .search-container select {
+            flex: 1;
+            min-width: 160px;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            outline: none;
+            font-size: 15px;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus,
+        .search-container select:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-search {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-search:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 120px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 48px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ABOUT SECTION */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(102, 126, 234, 0.25);
+            height: 400px;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .about-img:hover::before {
+            opacity: 0.15;
+        }
+
+        .about-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-img:hover img {
+            transform: scale(1.08) rotate(-0.5deg);
+        }
+
+        .about-content h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--deep-blue);
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 32px;
+            font-size: 17px;
+        }
+
+        /* STATS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 24px;
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* LISTINGS GRID */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 40px;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .listing-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .listing-card:hover::before {
+            opacity: 1;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(102, 126, 234, 0.2);
+        }
+
+        .listing-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .listing-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .listing-card:hover .listing-img-wrapper::after {
+            opacity: 1;
+        }
+
+        .listing-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+        }
+
+        .listing-card:hover img {
+            transform: scale(1.12) rotate(0.5deg);
+        }
+
+        .listing-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .listing-info {
+            padding: 28px;
+        }
+
+        .listing-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .listing-price {
+            font-size: 28px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 16px 0;
+        }
+
+        .listing-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .listing-features {
+            display: flex;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* SERVICES */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 32px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: transparent;
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-icon {
+            font-size: 56px;
+            margin-bottom: 24px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 12px rgba(102, 126, 234, 0.3));
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotateY(360deg);
+        }
+
+        .service-card h4 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* CONTACT SECTION */
+        #contact {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            border-radius: 60px 60px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -25%;
+            width: 150%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #contact h2 {
+            font-size: 48px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -1px;
+        }
+
+        #contact p {
+            margin: 24px 0 50px;
+            opacity: 0.95;
+            font-size: 18px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.7;
+        }
+
+        #contact .btn-contact-nav {
+            padding: 18px 50px;
+            font-size: 17px;
+            background: white;
+            color: #667eea;
+            position: relative;
+            z-index: 1;
+        }
+
+        #contact .btn-contact-nav:hover {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 50px 10%;
+            background: var(--deep-blue);
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 540px;
+            padding: 50px 45px;
+            border-radius: 32px;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            outline: none;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            background: var(--secondary-bg);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-modal {
+            width: 100%;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .submit-modal:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        #statusMsg {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 18px 32px;
+            border-radius: 16px;
+            z-index: 3000;
+            color: white;
+            display: none;
+            font-weight: 600;
+            box-shadow: var(--shadow-xl);
+            animation: slideInRight 0.4s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 56px; }
+            .section-title h2 { font-size: 40px; }
+            .about-content h2 { font-size: 36px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 15px 5%; }
+            section { padding: 80px 5%; }
+            
+            .hero {
+                padding: 100px 5% 60px;
+                min-height: 90vh;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .search-container {
+                padding: 16px;
+                gap: 10px;
+            }
+
+            .search-container input,
+            .search-container select {
+                min-width: 100%;
+                padding: 14px 16px;
+            }
+
+            .btn-search {
+                width: 100%;
+                padding: 16px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .listings-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 36px;
+            }
+
+            #contact h2 {
+                font-size: 36px;
+            }
+
+            #contact {
+                border-radius: 40px 40px 0 0;
+            }
+
+            .modal-content {
+                padding: 40px 30px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            header.nav-open nav {
+                display: flex;
+                position: fixed;
+                top: 70px;
+                right: 5%;
+                flex-direction: column;
+                gap: 0;
+                background: white;
+                padding: 12px;
+                border-radius: 24px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+                z-index: 1500;
+                border: 1px solid var(--border-color);
+                min-width: 240px;
+                animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            header.nav-open nav a {
+                color: var(--text-primary);
+                padding: 14px 20px;
+                border-radius: 12px;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+
+            header.nav-open nav a:hover {
+                background: var(--secondary-bg);
+            }
+
+            header.nav-open nav a::before {
+                display: none;
+            }
+
+            header.nav-open .btn-contact-nav {
+                margin-top: 8px;
+                width: 100%;
+                text-align: center;
+                padding: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .listings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 28px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: #667eea;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 16px;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            color: var(--deep-blue);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* PROCESS SECTION */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 32px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotateZ(360deg);
+        }
+
+        .process-step h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .process-step p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* MARKET INSIGHTS SECTION */
+        .insights-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .insights-content h3 {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--deep-blue);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .insights-content p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .insight-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--secondary-bg);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            background: var(--accent-bg);
+            transform: translateX(8px);
+        }
+
+        .insight-icon {
+            font-size: 32px;
+            min-width: 40px;
+        }
+
+        .insight-text h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin-bottom: 4px;
+        }
+
+        .insight-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .insights-chart {
+            background: var(--secondary-bg);
+            padding: 40px;
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .chart-stat {
+            margin-bottom: 32px;
+        }
+
+        .chart-value {
+            font-size: 42px;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .chart-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* FAQ SECTION */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 28px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .faq-question h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--deep-blue);
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .faq-item:hover .faq-question h4 {
+            color: #667eea;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+            min-width: 24px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 20px;
+        }
+
+        /* GALLERY SECTION */
+        .gallery-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            height: 320px;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .gallery-item {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <a href="#" class="logo">RealEstate</a>
+        <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#listings">Listings</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <button class="btn-contact-nav" onclick="openModal()">Get Started</button>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Find Your Dream Home</h1>
+            <p>Discover exceptional properties that match your lifestyle. Our expert team guides you through every step of finding your perfect home.</p>
+        </div>
+
+        <form class="search-container" id="searchForm">
+            <select name="location">
+                <option value="">📍 Location</option>
+                <option value="Los Angeles">Los Angeles, CA</option>
+                <option value="Miami">Miami, FL</option>
+                <option value="Austin">Austin, TX</option>
+                <option value="New York">New York, NY</option>
+                <option value="San Francisco">San Francisco, CA</option>
+            </select>
+            <select name="type">
+                <option value="">🏡 Property Type</option>
+                <option value="Villa">Villa</option>
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Condo">Condo</option>
+            </select>
+            <select name="minPrice">
+                <option value="0">💰 Min Price</option>
+                <option value="500000">$500k</option>
+                <option value="750000">$750k</option>
+                <option value="1000000">$1M</option>
+            </select>
+            <select name="maxPrice">
+                <option value="10000000">💎 Max Price</option>
+                <option value="1500000">$1.5M</option>
+                <option value="2000000">$2M</option>
+                <option value="5000000">$5M+</option>
+            </select>
+            <button type="submit" class="btn-search">Search Properties</button>
+        </form>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="P1119317.JPG.jpeg" alt="Premium Real Estate Portfolio">
+            </div>
+            <div class="about-content">
+                <h2>Leading the Real Estate Industry</h2>
+                <p>With over two decades of excellence, we've helped thousands of families find their dream homes. Our dedicated team of experts combines local market knowledge with cutting-edge technology to deliver exceptional results.</p>
+                <p>We don't just sell properties—we create lasting relationships and help build communities where people thrive.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5K+</div>
+                        <div class="stat-label">Homes Sold</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LISTINGS SECTION -->
+    <section id="listings" style="background: var(--secondary-bg);">
+        <div class="section-title">
+            <h2>Featured Listings</h2>
+            <p>Explore our handpicked selection of the most exclusive properties currently available on the market.</p>
+        </div>
+        <div class="listings-grid">
+            <div class="listing-card">
+                <div class="listing-img-wrapper">
+                    <img src="P1119307.JPG.jpeg" alt="Modern Luxury Apartment">
+                    <div class="listing-badge">Featured</div>
+                </div>
+                <div class="listing-info">
+                    <h3>Modern Luxury Apartment</h3>
+                    <div class="listing-price">$950,000</div>
+                    <div class="listing-location">
+                        📍 Premium Location
+                    </div>
+                    <div class="listing-features">
+                        <div class="feature-item">🛏️ 4 Beds</div>
+                        <div class="feature-item">🛁 3 Baths</div>
+                        <div class="feature-item">📏 2,500 sqft</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-img-wrapper">
+                    <img src="P1119308.JPG.jpeg" alt="Executive Penthouse">
+                    <div class="listing-badge">New</div>
+                </div>
+                <div class="listing-info">
+                    <h3>Executive Penthouse</h3>
+                    <div class="listing-price">$1,450,000</div>
+                    <div class="listing-location">
+                        📍 Downtown Elite
+                    </div>
+                    <div class="listing-features">
+                        <div class="feature-item">🛏️ 5 Beds</div>
+                        <div class="feature-item">🛁 4 Baths</div>
+                        <div class="feature-item">📏 3,200 sqft</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <div class="listing-img-wrapper">
+                    <img src="P1119316.JPG.jpeg" alt="Contemporary Villa">
+                    <div class="listing-badge">Hot</div>
+                </div>
+                <div class="listing-info">
+                    <h3>Contemporary Villa</h3>
+                    <div class="listing-price">$1,250,000</div>
+                    <div class="listing-location">
+                        📍 Exclusive Community
+                    </div>
+                    <div class="listing-features">
+                        <div class="feature-item">🛏️ 4 Beds</div>
+                        <div class="feature-item">🛁 3 Baths</div>
+                        <div class="feature-item">📏 2,800 sqft</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPERTY GALLERY SECTION -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-title">
+            <h2>Property Portfolio</h2>
+            <p>Explore our exclusive collection of premium properties.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="P1119318.JPG.jpeg" alt="Luxury Property 1">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Premium Estate</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119320.JPG.jpeg" alt="Modern Property 2">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Modern Living</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119322.JPG.jpeg" alt="Contemporary Home 3">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Contemporary Design</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119323.JPG.jpeg" alt="Elegant Property 4">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Elegant Living</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119324.JPG.jpeg" alt="Luxury Apartment 5">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Luxury Apartments</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119325.JPG.jpeg" alt="Premium Residence 6">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Premium Residence</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119326.JPG.jpeg" alt="Exclusive Property 7">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Exclusive Homes</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119329.JPG.jpeg" alt="Sophisticated Estate 8">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Sophisticated Design</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119332.JPG.jpeg" alt="Modern Estate 9">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Modern Estate</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119333.JPG.jpeg" alt="Luxury Living 10">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Luxury Living</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119334.JPG.jpeg" alt="Premium Design 11">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Premium Design</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="P1119335.JPG.jpeg" alt="Exclusive Living 12">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Exclusive Living</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive real estate solutions tailored to meet all your property needs.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h4>Buy a Home</h4>
+                <p>Find your dream property with expert guidance and access to exclusive listings that match your preferences.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h4>Sell a Home</h4>
+                <p>Maximize your property value with strategic marketing and our extensive network of qualified buyers.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔑</div>
+                <h4>Rent a Home</h4>
+                <p>Discover premium rental properties in desirable neighborhoods that fit your lifestyle and budget.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section style="background: var(--secondary-bg);">
+        <div class="section-title">
+            <h2>Client Success Stories</h2>
+            <p>See what our satisfied clients have to say about their real estate journey with us.</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"The team made our home buying experience seamless and enjoyable. They understood our needs perfectly!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div class="author-info">
+                        <h4>John Davis</h4>
+                        <p>Los Angeles, CA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Exceptional service! They sold our property 3 weeks faster than expected. Highly recommend!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <h4>Sarah Miller</h4>
+                        <p>Miami, FL</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Professional, knowledgeable, and caring. They went above and beyond to help us find our dream home!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RC</div>
+                    <div class="author-info">
+                        <h4>Robert Chen</h4>
+                        <p>Austin, TX</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section id="process">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Our streamlined process makes finding your perfect property simple and stress-free.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h4>Search & Browse</h4>
+                <p>Explore our extensive database of properties filtered by your preferences and budget.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h4>Schedule Tour</h4>
+                <p>Book a convenient time to view properties with our expert agents.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h4>Make an Offer</h4>
+                <p>Get expert guidance on pricing and negotiate the best deal for you.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h4>Close the Deal</h4>
+                <p>We handle all paperwork and legal requirements until you get the keys.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET INSIGHTS SECTION -->
+    <section style="background: var(--secondary-bg);">
+        <div class="insights-container">
+            <div class="insights-content">
+                <h3>Market Trends & Insights</h3>
+                <p>Stay informed with our latest real estate market analysis and property insights.</p>
+                <div class="insight-item">
+                    <div class="insight-icon">📈</div>
+                    <div class="insight-text">
+                        <h4>Price Growth</h4>
+                        <p>Average property prices up 12% year-over-year in major markets.</p>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">🏆</div>
+                    <div class="insight-text">
+                        <h4>Top Markets</h4>
+                        <p>Austin, Miami, and Denver leading in appreciation rates.</p>
+                    </div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-icon">⏱️</div>
+                    <div class="insight-text">
+                        <h4>Quick Sales</h4>
+                        <p>Average listing sells in 45 days in competitive markets.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="insights-chart">
+                <div class="chart-stat">
+                    <div class="chart-value">$2.3M</div>
+                    <div class="chart-label">Average Home Price</div>
+                </div>
+                <div class="chart-stat">
+                    <div class="chart-value">45</div>
+                    <div class="chart-label">Days on Market</div>
+                </div>
+                <div class="chart-stat">
+                    <div class="chart-value">12%</div>
+                    <div class="chart-label">Annual Growth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section>
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to common questions about buying, selling, and renting properties.</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">
+                    <h4>How long does the home buying process take?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    The typical home buying process takes 30-45 days from offer acceptance to closing. However, this can vary based on financing, inspections, and appraisals. We guide you through every step to ensure a smooth process.
+                </div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">
+                    <h4>What documents do I need to apply for a mortgage?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    You'll typically need recent pay stubs, tax returns (2 years), bank statements, and proof of employment. Our team can provide a complete checklist and connect you with trusted lenders.
+                </div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">
+                    <h4>Is it better to buy or rent?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    This depends on your financial situation, lifestyle, and goals. Buying builds equity and offers stability, while renting provides flexibility. We can help you analyze both options for your specific situation.
+                </div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">
+                    <h4>What is the best time to sell a home?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Spring and summer typically see higher buyer activity, but factors like market conditions, interest rates, and your personal timeline matter most. We'll advise you on the optimal timing for your property.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+        <h2>Ready to Find Your Home?</h2>
+        <p>Take the first step towards your dream property. Our team is ready to help you navigate the real estate journey with confidence.</p>
+        <button class="btn-contact-nav" onclick="openModal()">Get Started Today</button>
+    </section>
+
+    <footer>
+        <p>© 2026 RealEstate. All rights reserved. | Crafted with passion for your perfect home.</p>
+    </footer>
+
+    <!-- POPUP MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Let's Get Started</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="Phone Number (optional)">
+                </div>
+                <div class="form-group">
+                    <select name="interest" required>
+                        <option value="">I'm interested in...</option>
+                        <option value="buying">Buying a Property</option>
+                        <option value="selling">Selling a Property</option>
+                        <option value="renting">Renting a Property</option>
+                        <option value="consultation">Free Consultation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Tell us about your requirements..." rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-modal" id="formSubmitBtn">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="statusMsg"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // ========== PERFORMANCE OPTIMIZATIONS ==========
+        
+        // Throttle scroll events for better performance
+        const throttle = (func, limit) => {
+            let inThrottle;
+            return function(...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        };
+
+        // Debounce resize events
+        const debounce = (func, delay) => {
+            let timeoutId;
+            return function(...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(this, args), delay);
+            };
+        };
+
+        // Lazy load images using Intersection Observer
+        const setupLazyLoading = () => {
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                                observer.unobserve(img);
+                            }
+                        }
+                    });
+                });
+                document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+            }
+        };
+
+        // ========== FIREBASE CONFIGURATION ==========
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'real-estate-v4';
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        let user = null;
+
+        // ========== MODAL CONTROLS ==========
+        window.openModal = () => {
+            document.getElementById('modalOverlay').style.display = 'flex';
+        };
+        
+        window.closeModal = () => {
+            document.getElementById('modalOverlay').style.display = 'none';
+        };
+
+        // Close modal on outside click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        });
+
+        // ========== HEADER & NAVIGATION ==========
+        const headerEl = document.getElementById('header');
+        
+        // Throttled scroll listener
+        window.addEventListener('scroll', throttle(() => {
+            headerEl.classList.toggle('scrolled', window.scrollY > 50);
+            if (window.scrollY > 50) {
+                headerEl.classList.remove('nav-open');
+            }
+        }, 100));
+
+        // Mobile Navigation
+        window.toggleNav = () => {
+            headerEl.classList.toggle('nav-open');
+        };
+
+        // Debounced resize handler
+        window.addEventListener('resize', debounce(() => {
+            if (window.innerWidth > 768) {
+                headerEl.classList.remove('nav-open');
+            }
+        }, 250));
+
+        // Close mobile nav on outside click
+        document.addEventListener('click', (e) => {
+            if (!headerEl.contains(e.target) && headerEl.classList.contains('nav-open')) {
+                headerEl.classList.remove('nav-open');
+            }
+        });
+
+        // ========== FIREBASE AUTHENTICATION ==========
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+            }
+        };
+
+        onAuthStateChanged(auth, u => {
+            user = u;
+        });
+
+        // ========== STATUS MESSAGE ==========
+        const showStatus = (msg, isError = false) => {
+            const el = document.getElementById('statusMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+            el.style.background = isError ? 
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' : 
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+            
+            setTimeout(() => {
+                el.style.display = 'none';
+            }, 3500);
+        };
+
+        // ========== FORM SUBMISSION ==========
+        const handleInquiry = async (e) => {
+            e.preventDefault();
+            
+            if (!user) {
+                showStatus('Please wait, initializing...', true);
+                return;
+            }
+
+            const btn = document.getElementById('formSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = "Sending...";
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            data.timestamp = serverTimestamp();
+
+            try {
+                const col = collection(db, 'artifacts', appId, 'public', 'data', 'inquiries');
+                await addDoc(col, data);
+                showStatus("Thank you! We'll contact you soon.");
+                closeModal();
+                e.target.reset();
+            } catch (err) {
+                console.error('Submission error:', err);
+                showStatus("Something went wrong. Please try again.", true);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Submit Inquiry";
+            }
+        };
+
+        // Search Form
+        const handleSearch = (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const params = Object.fromEntries(formData.entries());
+            
+            // Filter out empty values
+            const searchParams = Object.entries(params)
+                .filter(([_, value]) => value)
+                .map(([key, value]) => `${key}: ${value}`)
+                .join(', ');
+            
+            if (searchParams) {
+                showStatus(`Searching for properties with: ${searchParams}`);
+            } else {
+                showStatus('Please select at least one search criteria', true);
+            }
+        };
+
+        // ========== EVENT LISTENERS ==========
+        document.getElementById('contactForm').addEventListener('submit', handleInquiry);
+        document.getElementById('searchForm').addEventListener('submit', handleSearch);
+
+        // ========== SMOOTH SCROLL FOR NAV LINKS ==========
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile nav after clicking
+                    headerEl.classList.remove('nav-open');
+                }
+            });
+        });
+
+        // ========== INITIALIZATION ==========
+        initAuth();
+        setupLazyLoading();
+    </script>
+</body>
+</html>
